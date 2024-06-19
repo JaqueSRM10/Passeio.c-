@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+public class Passenger
+{
+    public string Name { get; set; }
+    public string Seat { get; set; }
+    public List<string> Activities { get; set; }
+
+    public Passenger(string name, string seat, List<string> activities)
+    {
+        Name = name;
+        Seat = seat;
+        Activities = activities;
+    }
+}
+
+public class TourOrganizer
+{
+    private List<Passenger> passengers = new List<Passenger>();
+
+    public void AddPassenger(string name, string seat, List<string> activities)
+    {
+        Passenger passenger = new Passenger(name, seat, activities);
+        passengers.Add(passenger);
+    }
+
+    public void ListPassengers()
+    {
+        foreach (Passenger p in passengers)
+        {
+            Console.WriteLine($"Name: {p.Name}, Seat: {p.Seat}, Activities: {string.Join(", ", p.Activities)}");
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        TourOrganizer organizer = new TourOrganizer();
+
+        Console.Write("Passenger Name: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Seat Number: ");
+        string seat = Console.ReadLine();
+
+        Console.Write("Activities (comma separated): ");
+        List<string> activities = new List<string>(Console.ReadLine().Split(','));
+
+        for (int i = 0; i < activities.Count; i++)
+        {
+            activities[i] = activities[i].Trim();
+        }
+
+        organizer.AddPassenger(name, seat, activities);
+        organizer.ListPassengers();
+    }
+}
+
+
+
